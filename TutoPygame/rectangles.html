@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Pygame, créer des jeux vidéos avec python
+        </title>
+        <meta charset="utf-8">
+        <meta name="author" content="Pottier Victor">
+        <meta name="description" content="Ce site web vous initiera au module pygame.">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+    <body>
+        <ol class="parcours">
+            <li>Introduction</li>
+            <ul>
+                <li>Avertissement</li>
+                <li>Pourquoi Pygame</li>
+                <li>Qu'est-ce qu'un jeu vidéo</li>
+                <li>Prérequis</li>
+                <li>1... 2... 3... Codez</li>
+            </ul>
+            <li><b>Structure et fonctionnement général</b></li>
+            <ul>
+                <li>Structure Elémentaire</li>
+                <li>L'écran</li>
+                <li>Boucles du jeu</li>
+                <li>Fin de boucle principale</li>
+                <li>Conclusion</li>
+            </ul>
+        </ol>
+        <header class="title">
+            Les rectangles
+        </header>
+        <br>
+        <main>
+            <div class="maindiv" style="height: 4380px;">
+            <h2>Qu'est-ce qu'un rectangle ?</h2>
+            <p>Un rectangle est une "boîte" que l'on dessine autour de <a href="surfaces.html">surfaces</a>. Les rectangles sont notamment utiles pour positionner une élément ou détecter une collision avec un point (x; y) ou un autre rectangle. Quand on définit un rectangle, on définit également sa position sur l'écran. Sa position peut être définie par rapport à différents points du rectangle : son coin supérieur gauche (topleft), son coin supérieur droit (topright), son coin inférieur gauche (bottomleft), son coin inférieur droit (bottomright), et enfin son centre (center)</p>
+            <img src="Images/tuto12.png" style="margin-left: 150px;">
+            <p>Ainsi, lorsqu'on définit un rectangle grâce à la méthode <i>get_rect()</i>, on l'associe à une surface et on définit sa position par rapport au point désiré dans les parenthèses. Essayons par exemple d'obtenir un rectangle autour de notre personnage et stocker le résultat obtenu dans une variable :</p>
+            <img src="Images/tuto13.PNG" style="margin-left: 250px;">
+            <h4>/ Désormais, toute nouveauté que l'on ajoutera à notre code sera spécifiée par un # à la fin de la ligne /</h4>
+            <p>Et voilà ! Nous venons de créer notre tout premier rectangle. Plusieurs choses sont à noter. Premièrement, le centre de notre rectangle est positionné en (300; 175), on repère cela grâce à l'instruction <i>center=(300, 175)</i>. Deuxièmement, notre rectangle n'a pas besoin d'être affiché à l'écran car les rectangles de Pygame sont invisibles. Troisièmement, les dimensions du rectangle correspondent à celles de sa surface d'origine, içi celles de <i>personnage</i> et donc de l'image <i>pirate.png</i>. Nous pouvons vérifier les dimensions de notre rectangle grâce aux attributs <i>width</i> et <i>height</i> d'un objet <i>rectangle</i>. Donc, si nous écrivons :</p>
+            <img src="Images/tuto14.PNG" style="margin-left: 280px;">
+            <p>Cela devrait afficher les dimensions de notre rectangle dans le terminal. Si nous vérifions les dimensions de l'image utilisée pour notre personnage, nous constaterons que celles-ci sont identiques. Le principe de notre rectangle cependant est que la surface qui lui est associé doit être à la même position. La surface doit suivre son rectangle. Cela peut être résolu très simplement en remplacant le tuple de coordonnées par le rectangle correspondant dans l'instruction blit qui dessine sa surface associée. Testons cela pour notre personnage :</p>
+            <img src="Images/tuto15.PNG" style="margin-bottom: 150px; margin-left: 10px;">
+            <img src="Images/tuto16.png" style="margin-left: 10px;">
+            <span style="position: relative; left: 240px; bottom: 150px;">Code</span><span style="position: relative; left: 780px;">Résultat</span>
+            <p>Notre personnage est ainsi placé aux coordonnées du rectangle ! Et comme nous pouvons le constater, notre personnage est enfin au centre de l'écran ! Mais les rectangles peuvent faire encore mieux !</p>
+            <h2>Déplacer un rectangle</h2>
+            <p>Et si nous réessayons de déplacer notre personnage ? Mais en utilisant les rectangles cette fois bien sûr ! Précèdemment, nous avons créé une variable pour stocker la coordonnée y du personnage. Mais cette fois ci, cela ne sera pas nécessaire. En effet, en plus des attributs <i>width et height</i> qui permettent de récupérer les dimensions du rectangle associé, un rectangle possède plusieurs attributs nous permettant de récupérer des coordonnées à certains de ses points :</p>
+            <img src="Images/tuto17.png" style="margin-left: 200px;">
+            <p>En exécutant ces instructions, nous remarquons que <i>x = left</i> et <i>y = top</i>. Donc, <i>(x; y) = (left; top) = topleft</i>. Et nous savons déjà à quoi ces égalités sont associées. En effet, rappelons-nous que le point 0 (l'origine) de tout élément en Pygame est situé en son coin supérieur gauche. Mais revenons à nos déplacements. Un déplacement d'un rectangle consiste simplement à modifier ses coordonnées, c'est-à-dire modifier la valeur d'un des attributs çi-dessus. Par exemple, <i>personnage_rect.x = 0</i> déplacera le personnage tout à gauche. Do it yourself now! Vous allez le faire par vous-même maintenant. Les consignes sont les suivantes :</p>
+            <ul>
+                <li>Faites des recherches sur la gestion des <a href="evenements.html">évènements</a> de Pygame. A quoi correspond <i>pygame.KEYDOWN</i> ?</li>
+                <li>Utiliser <i>pygame.KEYDOWN</i> à l'intérieur de la boucle évènementielle.</li>
+                <li>Ecrivez les instructions nécessaires pour que notre personnage prenne une position aléatoire à chaque fois qu'on appuiera sur une touche du clavier.</li>
+            </ul>
+            <video src="Videos/tuto3.mp4" controls style="margin-left: 100px;">La vidéo n'a pas pu être chargée</video>
+            <span style="position: relative; bottom: 200px; left: 30px;">Résultat attendu</span>
+            <br>
+            <br>
+            <img src="Images/tuto18.PNG" class="correction" style="margin-left: 185px;">
+            <span style="position: relative; bottom: 125px; left: 35px;"><span class="espaces">_</span>Survoler pour<br>voir la correction</span>
+            <p>Qu'est-il écrit dans cette correction ? Tout d'abord, nous avons utilisé le test <i>if event.type == pygame.KEYDOWN</i>. Ainsi, chaque fois que l'évènement <i>KEYDOWN</i> aura lieu, les coordonnées du rectangle que notre personnage suit prendront une valeur aléatoire. Les limites numériques à l'intérieur de randint n'ont pas été choisies au hasard cependant. L'expression utilisée est de la logique pure et simple car on exploite les dimensions de l'écran et du rectangle de telle sorte que le rectangle ne soit jamais en dehors de l'écran. A la fin on affiche les nouvelles coordonnées obtenues en se souvenant que topleft = (x; y).</p>
+            <p>Mais saviez-vous ce qui serait encore plus cool ? Pouvoir controler notre personnage grâce aux flèches directionnelles. Alors, supprimons ce que nous venons d'ajouer et essayons d'écrire ceçi à la place après la boucle évènementielle :</p>
+            <img src="Images/tuto19.PNG" style="margin-bottom: 30px; margin-left: 20px;">
+            <video src="Videos/tuto4.mp4" controls style="margin-left: 70px;">La vidéo n'a pas pu être chargée</video>
+            <span style="position: relative; left: 200px; bottom: 30px;">Code</span><span style="position: relative;  left: 775px;">Résultat</span>
+            <p>La ligne 27 : <i>keys = pygame.key.get_pressed()</i> permet de détécter si une touche du clavier est pressée. Quelle différence avec <i>pygame.KEYDOWN</i> ? Pour <i>pygame.KEYDOWN</i>, c'est l'action d'appuyer sur une touche qui exécutera l'évènement. Tandis que pour <i>pygame.key.get_pressed()</i>, c'est l'action de maintenir une touche qui activera l'évènement continuellement. Ainsi en supposant que nous utilisons pygame.KEYDOWN, si on maintient la flèche gauche par exemple, notre personnage ne se déplacera qu'une seule fois jusqu'à ce que la flèche gauche soit relâchée pour pouvoir ré-appuyer dessus à nouveau au lieu de continuer de se déplacer vers la gauche. Ce problème est immédiatement réglé avec pygame Vous pouvez vous-même faire des tests pour vérifier cela. Notons également que <i>SPEED</i> est une constante définie au début du programme qui correspond à la vitesse de déplacement de notre personnage. Autrement, <i>pygame.K_RIGHT / K_LEFT / K_BOTTOM / K_TOP</i> sont toutes les quatres des constantes de Pygame représentant chacune une touche du clavier. Par ailleurs, toutes les constantes du module Pygame qui représentent une touche du clavier commencent par <i>"K_"</i>, K signifiant key, touche de clavier en français. INSERER RESULTAT RENVOYE PAR GET_PRESSED(). N'oublions pas l'essentiel, ces instructions ont pour but de nous permettre de déplacer le personnage. Nous réussissons à réaliser cela en modifiant les coordonnées de son rectangle. On incrémente ou décrémente ses attributs <i>x</i> et <i>y</i> d'un nombre <i>SPEED</i> selon la flèche pressée.</p>
+            <button class="navbuttonleft"><a href="surfaces.html">Précèdent</a></button>
+            <img src="Images/pygame_logo.png" alt="logo pygame" class="logo">
+            <button class="navbuttonright"><a href="evenements.html">Suivant</a></button>
+        </div>
+        </main>
+    </body>
+</html>

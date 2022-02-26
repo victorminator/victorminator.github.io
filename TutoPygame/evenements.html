@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Pygame, créer des jeux vidéos avec python
+        </title>
+        <meta charset="utf-8">
+        <meta name="author" content="Pottier Victor">
+        <meta name="description" content="Ce site web vous initiera au module pygame.">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+    <body>
+        <ol class="parcours">
+            <li>Introduction
+                <ul>
+                    <li>Avertissement</li>
+                    <li>Pourquoi Pygame ?</li>
+                    <li>Qu'est-ce qu'un jeu vidéo ?</li>
+                    <li>Prérequis</li>
+                    <li>1... 2... 3... Codez !</li>
+                </ul>
+            </li>
+            <li>Structure et fonctionnement général</li>
+        </ol>
+        <header class="title">
+            Les évènements
+        </header>
+        <br>
+        <main>
+            <div class="maindiv" style="height: 4380px;">
+            <h2>Partie théorique</h2>
+            <p>Pouvoir interagir avec le jeu est l'un des principes les plus importants du jeu vidéo. Le joueur doit pouvoir interagir avec ce qui se passe à l'écran. Pour cela, nous pouvons utiliser la boucle évènementielle de Pygame <i>for variable_evenement in pygame.event.get()</i>. Il faut noter que <i>pygame.event.get()</i> renvoie une liste contenant des objets de la classe <i>Event</i> de Pygame. Chaque objet <i>Event</i> possède un attribut <i>type</i> qui permet différencier un objet <i>Event</i> d'un autre, <i>type</i> sert ainsi de référence pour chacun des objets <i>Event</i>. Nous utiliserons donc <i>type</i> pour détecter un évènement choisi. Comme avec <i>event.type == pygame.QUIT</i>. Mais par curiosité essayons d'afficher la valeur de <i>pygame.QUIT</i></p>
+            <img src="./Images/tuto20.PNG" style="margin-left: 300px;">
+            <p>On remarque que pygame.QUIT vaut 256, ce qui correspond au numéro de référence de l'évènement, c'est-à-dire son attribut <i>type</i>. Nous pouvons obtenir tous les évènement de Pygame associés à leur valeur <i>type</i> grâce au programme suivant :</p>
+            <img src="Images/tuto21.PNG" style="margin-left: 400px;">
+            <p>Notons que <i>pygame.event.event_name()</i> renvoie l'évènement (sous forme de chaîne de caractères) associé au nombre <i>int</i> reçu en paramètre. Par ailleurs si cette boucle <i>for</i> s'exécute 32848 fois, ce n'est pas un hasard. A partir de la valeur 32847 et jusqu'à la valeur 65535, l'évènement associé sera toujours <i>UserEvent</i>. Il faut également se rappeler qu'à la plupart des valeurs n'est associé aucun évènement. Si c'est le cas, alors la fonction <i>event_name()</i> renvoie Unknown au lieu du nom de l'évènement. La valeur "Unknown" ne nous intéresse pas du tout d'où l'intérêt de l'instruction <i>if event != "Unknown"</i>. Focalisons-nous cependant sur quelques uns des évènements les plus importants :</p>
+            <table style="margin-left: 320px;">
+                <thead>
+                    <tr>
+                        <th>Numéro d'identification</th>
+                        <th>Nom de l'évènement</th>
+                        <th>Conditions d'activation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>256</td>
+                        <td>Quit</td>
+                        <td>Fermeture de la fenêtre</td>
+                    </tr>
+                    <tr>
+                        <td>768</td>
+                        <td>KeyDown</td>
+                        <td>Une touche du clavier a subi une pression</td>
+                    </tr>
+                    <tr>
+                        <td>769</td>
+                        <td>KeyUp</td>
+                        <td>Une touche du clavier est relâchée</td>
+                    </tr>
+                    <tr>
+                        <td>1024</td>
+                        <td>MouseMotion</td>
+                        <td>Le curseur de la souris est déplacé</td>
+                    </tr>
+                    <tr>
+                        <td>1025</td>
+                        <td>MouseButtonDown</td>
+                        <td>Clic droit ou gauche</td>
+                    </tr>
+                    <tr>
+                        <td>1026</td>
+                        <td>MouseButtonUp</td>
+                        <td>Clic droit ou gauche (relâché)</td>
+                    </tr>
+                    <tr>
+                        <td>32847-65535</td>
+                        <td>UserEvent</td>
+                        <td>Evènement personnalisé</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Mais quel est le lien avec <i>pygame.event.get()</i> ? La réponse à cela est simple. <i>pygame.event.get()</i> renvoie la liste de tous les évènements qui se sont produits lors de son appel. Faisons un test en ajoutant juste avant la boucle évènementielle les instructions suivantes :</p>
+            <img src="Images/tuto22.PNG" style="margin-left: 370px;">
+            <p>En exécutant le programme, nous remarquons que dès que l'on fait un clic droit ou gauche, que l'on déplace le curseur ou encore que l'on appuie sur une touche du clavier, le programme affiche une liste contenant les évènements provoqués. <i>if liste_evenements</i> peut sembler confus mais il s'agit simplement d'une façon plus "pythonesque" de dire <i>if len(liste_evenements) > 0</i>. Ainsi, détecter les évènements en Pygame consiste juste à parcourir la liste <i>event.get()</i>. Puis, pour chaque objet <i>Event</i> dans cette liste, on compare leur attribut <i>type</i> pour vérifier si l'évènement sélectionné correspond à l'évènement choisi. Nous pouvons donc savoir si un évènement s'est produit grâce à ce processus.</p>
+            <h2>Partie pratique</h2>
+            <p>Maintenant que nous connaissons l'aspect théorique des évènements de Pygame (et honnêtement ce n'est pas grave si nous n'avons pas tout compris), intéressons-nous aux aspects pratiques. Utiliser un évènement s'écrit en une ligne : <i>if variable_evenement.type == constante_evenement</i> où <i>variable_evenement</i> correspond au nom donné à la variable de la boucle évènementielle et <i>constante_evenement</i> représente le numéro d'identification de l'évènement choisi. Et n'oublions surtout pas que cette instruction doit être à l'intérieur de la boucle évènementielle ! Donnons-nous un objectif maintenant, nous devons essayer de faire apparaitre à l'écran la surface <i>carre_rouge</i> créée auparavant à la position (175; 150). Puis, chaque fois que le joueur appuiera sur une touche du clavier quelconque, ce même carré prendra une couleur aléatoire. Rappel : <i>nom_surface.fill(couleur)</i> permet de remplir une surface d'une couleur au choix, qui peut être sous format RGB c'est-à-dire un tuple contenant trois valeurs allant de 0 à 255. La fonction <i>randint()</i> du module random permet quant à elle de générer des nombres aléatoires. La fonction <i>couleur_aleatoire()</i> est donnée :</p>
+            <img src="Images/tuto23.PNG" style="position: relative; left: 100px; bottom: 60px;">
+            <img src="Images/tuto24.PNG" class="correction" style="position: relative; top: 180px; right: 230px;">
+            <video src="Videos/tuto5.mp4" controls style="position: relative; left: 500px; bottom: 200px;"></video>
+            <span style="position: relative; right: 500px; bottom: 190px;">Survoler pour voir la correction</span><span style="position: relative; bottom: 175px; right: 90px;">Résultat attendu</span>
+            <div style="position: relative; bottom: 170px;">
+                <h2>Gestion du clavier</h2>
+                <p>Nous avons réussi, mais nous ne sommes pas entièrement satisfaits car le carré change de couleur dès qu'on l'on appuie sur n'importe quelle touche alors qu'il serait évidemment bien mieux d'obtenir le même résultat mais avec une touche exclusive. Par exemple, chaque fois que l'on appuie sur la barre espace. Cela peut être facilement résolu car en plus de posséder un attribut <i>type</i>, certains évènements comme <i>KeyDown</i> ou <i>KeyUp</i> possèdent un attribut <i>key</i> qui fonctionne plus ou moins de la même manière que <i>type</i> notamment au niveau de la syntaxe : <i>if variable_evenement.key == constante_touche</i>. Par exemple, pour la barre espace :</p>
+                <img src="Images/tuto25.PNG" alt="tuto" style="margin-left: 350px;">
+            </div>
+            <p></p>
+            <button class="navbuttonleft"><a href="rectangles.html">Précèdent</a></button>
+            <img src="Images/pygame_logo.png" alt="logo pygame" class="logo">
+            <button class="navbuttonright"><a href="rectangles.html">Suivant</a></button>
+        </div>
+        </main>
+    </body>
+</html>

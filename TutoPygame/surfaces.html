@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Pygame, créer des jeux vidéos avec python
+        </title>
+        <meta charset="utf-8">
+        <meta name="author" content="Pottier Victor">
+        <meta name="description" content="Ce site web vous initiera au module pygame.">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+    <body>
+        <ol class="parcours">
+            <li>Introduction
+                <ul>
+                    <li>Avertissement</li>
+                    <li>Pourquoi Pygame ?</li>
+                    <li>Qu'est-ce qu'un jeu vidéo ?</li>
+                    <li>Prérequis</li>
+                    <li>1... 2... 3... Codez !</li>
+                </ul>
+            </li>
+            <li>Structure et fonctionnement général</li>
+        </ol>
+        <header class="title">
+            Les surfaces
+        </header>
+        <br>
+        <main>
+            <div class="maindiv" style="height: 3580px;">
+            <h2>Qu'est-ce qu'une surface ?</h2>
+            <p>Le personnage de votre jeu ? C'est une surface. Les ennemis ? Des surfaces. L'arrière-plan ? Une surface. Les power-ups ? Des surfaces. Les textes du jeu ? Des surfaces également. Même l'écran en lui-même est une surface. Comme nous le constatons, en Pygame "surface" est un terme assez large. Une surface est un objet plaçable dans l'écran qui peut occuper un espace variable et autour de laquelle nous pouvons dessiner des <a href="rectangles.html">rectangles</a>. Une surface est très souvent stockée dans une variable et correspond généralement à une image importée grâce à <i>pygame.image.load(image)</i>. Cependant, il est également 
+            possible de créer une surface sans image avec l'instruction <i>pygame.surface.Surface(tuple_dimensions)</i>. Prenons par exemple le code suivant :</p>
+            <img src="Images/tuto5.PNG" style="margin-left: 20%;">
+            <p>Nous venons de créer trois surfaces différentes : <i>arriere_plan, personnage, et carre_rouge</i>. Nous découvrons également deux nouvelles méthodes associées aux surfaces : <i>convert_alpha() et fill(couleur)</i>. La première méthode permet simplement de convertir l'image importée en un format plus adapté pour Pygame. Le changement produit est à peine visible en apparence mais il sera tout de même hautement recommandé d'utiliser <i>convert_alpha()</i> à chaque fois que nous voudrons importer une image. La seconde méthode <i>fill(couleur)</i> permet de remplir une surface d'une couleur de notre choix. Dans l'exemple, nous avons utilisé le codage RGB, donc un tuple contenant trois valeurs associées précisement à l'intensité du rouge, du vert, puis du bleu. Mais cette méthode, tout comme l'instruction <i>pygame.surface.Surface(tuple_dimensions)</i>, sera souvent peu utilisée, car si nous voulons un beau jeu, nous utiliserons principalement des images avec plein de couleurs différentes que des carrés ou des retcangles monochromes.</p>
+            <h2>Transférer une image vers l'écran</h2>
+            <p>Un problème persiste, si nous éxecutons le code çi-dessus, rien ne s'affichera à l'écran. La raison est très simple, nous avons créé des surfaces mais nous n'avons jamais explicitement ordonné au programme d'afficher quoi que ce soit à l'écran. Mais comment fait-on cela ? Nou avons déjà donné la réponse dans la page précèdente : la méthode <i>blit(surface, position)</i>. Mais comment et où utiliser cette méthode ? Essayez de deviner. Vous avez la réponse ? Tant mieux ! La méthode <i>blit</i> est une méthode appartenat à notre écran. Donc, selon l'exemple çi-dessus et en supposant que nous souhaitons placer notre personnage au centre de l'écran, nous écrirons <i>screen.blit(personnage, (300, 175))</i>. Mais où inclure cette instruction ? Dans la boucle principale du jeu évidemment ! Pour que votre programme soit bien organisé, je conseille personnellement d'écrire toutes les instructions <i>blit</i> vers la fin de la boucle, juste avant <i>pygame.display.update()</i>. Comme ceçi :</p>
+            <img src="Images/tuto7.PNG" style="position: relative; bottom: 50px; left: 2%;">
+            <img src="Images/tuto6.png" style="margin-left: 5%;">
+            <span style="position: relative; left: 20%; bottom: 45px;">Code</span><span style="position: relative; left: 68%;">Résultat</span>
+            <p>Et voilà ! Nous avons réussi à faire apparaître le personnage de notre jeu à l'écran. Toutefois si vous avez l'oeil, vous remarquerez que notre personnage n'est pas tout à fait au centre de l'écran. Pourtant, les coordonnées sont correctes, (300; 175) correspond bel et bien au point central de l'écran. Mais là n'est pas le problème. En fait, il faut savoir que, tout comme l'écran, l'origine d'une surface est son coin supérieur gauche. Ainsi, c'est le coin supérieur gauche de notre personnage qui est placé au point (300; 175). On pourra remédier à ce problème plus tard à l'aide des rectangles. Mais pour l'instant, j'ai un exercice pour vous : je veux que vous fassiez en sorte que le personnage affiché à l'écran se déplace automatiquement vers le haut. Indice : aidez-vous de la méthode blit et d'une variable correspondant à la coordonnée y du personnage.</p>
+            <img src="Images/tuto8.PNG" style="margin-bottom: 5.5%;" class="correction">
+            <video src="Videos/tuto1.mp4" controls style="margin-left: 10px;">La vidéo n'a pas pu être chargée</video>
+            <span style="position: relative; left: 12%; bottom: 55px;">Survoler pour voir la correction</span><span style="position: relative; top: 0.2%; left: 50%;">Résultat attendu</span>
+            <p>Ca bouge ! Excellent ! Petit problème, notre personnage laisse une étrange traînée derrière lui. En fait, nous dessinons des images mais celles-ci ne s'effacent pas automatiquement. Pour faire disparaître les anciennes images, il faut dessiner une nouvelle image sur celle-ci. Ainsi, les nouvelles images écrasent les anciennes. Pour illustrer cela, nous utiliserons l'image d'arrière plan du jeu que nous avons importé :</p>
+            <img src="Images/tuto9.PNG" style="position: relative; bottom: 40px; left: 1.5%;">
+            <img src="Images/tuto10.png" style="margin-left: 2.5%;">
+            <span style="position: relative; left: 20%; bottom: 40px;">Code</span><span style="position: relative; top: 0.2%; left: 67.5%;">Résultat</span>
+            <h2>Arrière-plan</h2>
+            <p>Mais... mais... où est donc passé notre personnage ? Malgré l'instruction <i>blit</i> à la ligne 22, notre personnage n'est plus du tout affiché à l'écran. Le problème est içi dans l'ordre des instructions. Nous affichons un nouvel arrière-plan qui couvre l'intégralité de l'écran APRES avoir dessiné une nouvelle image de notre personnage. Ainsi, la nouvelle image de notre personnage (en plus des anciennes) est recouverte par l'arrière plan. Il est donc essentiel de comprendre que la première surface à dessiner à l'écran est l'arrière-plan. Si celui-ci est une image, il faudra écrire AVANT toutes les autres instructions <i>blit</i> : <i>variable_ecran.blit(image_arriere_plan, (0, 0))</i>. Les dimensions de l'image utilisée devront également correspondre aux dimensions de l'écran et il (son coin supérieur gauche) doit être positioné aux coordonnées (0; 0) afin de couvrir l'intégralité de l'écran. Autrement si l'arrière-plan est une simple couleur, on utilise (encore une fois AVANT d'afficher les autres surfaces) l'instruction <i>variable_ecran.fill(couleur)</i>. Maintenant que ces connaissances nous ont été fournies, corrigeons le programme précèdent :</p>
+            <img src="Images/tuto11.PNG" style="margin-left: 10px; position: relative; bottom: 50px;">
+            <video src="Videos/tuto2.mp4" controls style="margin-left: 15px;"></video>
+            <span style="position: relative; left: 19.5%; bottom: 45px;">Code</span><span style="position: relative; top: 0.2%; left: 67%;">Résultat</span>
+            <h2>Conclusion</h2>
+            <ul>
+                <li>On stocke les images que nous importons dans une variable grâce à <i>pygame.image.load(fichier_image).convert_alpha()</i></li>
+                <li>Les images importées sont automatiquement converties en <i>surfaces</i></li>
+                <li>Pour afficher une surface à l'écran, on utilise la méthode <i>variable_ecran.blit(surface, (coordonnée_x, coordonnée_y))</i></li>
+                <li>L'origine d'une surface est son coin supérieur gauche, une surface est donc positionnée par rapport à celui-ci.</li>
+                <li>On dessine toujours l'arrière-plan en premier, celui-ci doit être positionné aux coordonnées (0; 0) et ses dimensions doivent correspondre à celles de l'écran afin de recouvrir l'intégralité de celui-ci</li>
+            </ul>
+            <p>Maintenant que vous saviez manipuler des surfaces, amusez-vous ! Commencez par afficher <i>carre_rouge</i> à l'écran puis essayez d'importer plein d'images. Pour trouver de bonnes images pour votre jeu, vous pouvez aller sur le site <a href="https://opengameart.org/">OpenGameArt</a> (totalement gratuit) ou <a href="https://craftpix.net/freebies/?utm_campaign=Website&utm_source=opengameart.org&utm_medium=public">CraftPix</a> (partiellement gratuit). Dans la prochaine partie, nous aborderons la gestion des évènements alors soyez en forme car les évènements sont l'un des plus gros morceaux de Pygame.</p>
+            <button class="navbuttonleft"><a href="bases.html">Précèdent</a></button>
+            <img src="Images/pygame_logo.png" alt="logo pygame" class="logo">
+            <button class="navbuttonright"><a href="rectangles.html">Suivant</a></button>
+        </div>
+        </main>
+    </body>
+</html>

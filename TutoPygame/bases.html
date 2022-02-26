@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Pygame, créer des jeux vidéos avec python
+        </title>
+        <meta charset="utf-8">
+        <meta name="author" content="Pottier Victor">
+        <meta name="description" content="Ce site web vous initiera au module pygame.">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+    <body >
+        <ol class="parcours">
+            <li>Introduction
+                <ul>
+                    <li>Avertissement</li>
+                    <li>Mais alors, pourquoi Pygame ?</li>
+                    <li>Qu'est-ce qu'un jeu vidéo ?</li>
+                    <li>Prérequis</li>
+                    <li>1... 2... 3... Codez !</li>
+                </ul>
+            </li>
+            <li>Structure et fonctionnement général</li>
+        </ol>
+        <header class="title">
+            Les bases
+        </header>
+        <br>
+        <main>
+            <div class="maindiv" style="height: 2225px;">
+            <h2>Structure Elémentaire</h2>
+            <img src="Images/tuto2.PNG" style="margin-left: 12%;">
+            <br>
+            <br>
+            Ces quelques lignes que vous voyez çi-dessus constitueront la plupart de vos projets Pygame. Et c'est sur cette page que nous expliquerons l'utilité de ces instructions, ce qui nous amènera ensuite à 
+            discuter du fonctionnement de pygame. Toutefois, si vous avez suivi et compris ce qui a été dit à la page précèdente, quelque chose devrait vous choquer dans le code çi-dessus. Qu'est-ce donc à votre avis ? 
+            Nous connaissons la réponse : Pygame a été importé mais jamais initialisé ! D'où l'importance de la fonction <i>init()</i>. Pour éviter de futur bugs, il faut écrire <i>pygame.init()</i> juste après avoir importé les modules nécessaires au projet.
+            <h2>L'écran</h2>  
+            L'écran est créé grâce à ligne de code suivante : <i>screen = pygame.display.set_mode(SCREEN_DIMENSIONS)</i>
+            Içi, nous venons d'accéder au sous-module <i>display</i> qui contient tous les outils pour gérer l'écran. L'écran est le panneau d'affichage du jeu. On y fera apparaître des images. Il faut noter que <i>SCREEN_DIMENSIONS</i> doit être remplacé par les dimensions de votre choix pour l'écran, le choix du nom de la variable est également libre mais celle-ci est communément appelée <i>écran</i> ou <i>screen</i> si vous aimez l'anglais. Une fonctionnalité très pratique de l'écran est de pouvoir se repérer dans celui-ci grâce à des coordonnées x et y.
+            <br>
+            <br>
+            <img src="Images/tuto4.png" style="position: relative; left: 23%;">
+            <br>
+            <p>Que remarquons-nous d'atypique sur ce schéma ? Jettons donc un coup d'oeil à l'axe des ordonnées. Dans la plupart des graphes courants, plus on monte, plus <i>y</i> augmente. Alors que plus on descend dans le graphe, plus <i>y</i> diminue. C'est exactement le contraire pour l'écran de Pygame. Il faut interpréter celui-ci comme un océan. Quand on descend, la profondeur augmente ! Ainsi le maximum de la coordonnée y est situé tout en bas de l'écran, et le minimum tout en haut.</p>
+            <p>Il existe plusieurs méthodes associées à l'écran, par exemple, <i>pygame.display.set_caption(Titre)</i> permet de définir le titre du jeu, le nom de la fenêtre qui sera affiché en haut à gauche, en prenant comme argument une chaîne de caractères qui correspond au titre que l'on souhaitera afficher. Sinon, est également disponible <i>pygame.display.set_icon(surface)</i> pour définir l'icône du jeu mais encore plus important : la méthode <i>variable_ecran.blit(surface, position)</i>. "BLIT" signifie BLock Image Transfer et comme son nom l'indique, cette méthode permet de transférer une image à une position souhaitée sur la variable_ecran associée. On reviendra à cette méthode plus tard, après avoir discuté des <i>surfaces</i>.</p>
+            <h2>Les boucles importantes du jeu</h2>
+            La boucle <i>while playing</i> permet au jeu de tourner en boucle. C'est là qu'on va inclure les instructions définissant le jeu. Cette boucle contient elle-même une autre boucle : la boucle évènementielle. Elle est définie par la ligne de code : <i>for event in pygame.event.get()</i>, qui a pour but de détecter certaines entrées de l'utilisateur et d'agir en conséquence. Par exemple, cette boucle peut détecter si le joueur a cliqué sur la souris, pressé la barre espace, ou si un certain laps de temps s'est écoulé. L'évènement (ou entrée) le plus commun est <i>pygame.QUIT</i> qui correspond à l'action de fermer la fenêtre du jeu.
+            <h2>A la fin de la boucle principale</h2>
+            <p>A la fin de chaque itération, on met généralement à jour ce qui est affiché à l'écran avec l'instruction : <i>pygame.display.update()</i>. Après cette ligne, on gère la vitesse du jeu avec la méthode <i>variable_clock.tick(vitesse_en_FPS)</i> grâce à l'objet Clock créé auparavant, 'vitesse_en_FPS' doit bien sûr être remplacé par la vitesse en FPS du jeu. Conventionnellement, celle-ci vaudra 60 FPS pour la plupart de nos jeux pygame. Mais pour les jeux les plus "retros", elle vaudra plus ou moins dans les 20-40 FPS. Mais je vous encourage à vous amuser et à tester toutes les vitesses possibles !</p>
+            <h2>Conclusion</h2>
+            <p>Ainsi, si nous exécutons le code çi-dessus (sans oublier <i>pygame.init()</i>), nous devrions obtenir le résultat suivant :</p>
+            <img src="Images/tuto3.png" style="margin-left: 25%; margin-top: 2%;">
+            <p>Et voilà ! Nous venons tout juste de créer notre toute première fenêtre Pygame ! Il reste cependant un problème, notre fenêtre n'a rien à afficher mis à part un écran noir. Nous allons immédiatement remédier à cela dans la prochaine partie.</p>
+            <button class="navbuttonleft"><a href="intro.html">Précèdent</a></button>
+            <img src="Images/pygame_logo.png" alt="logo pygame" class="logo">
+            <button class="navbuttonright"><a href="surfaces.html">Suivant</a></button>
+        </div>
+        </main>
+    </body>
+</html>
