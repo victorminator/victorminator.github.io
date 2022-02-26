@@ -12,15 +12,14 @@
     </head>
     <body>
         <ol class="parcours">
-            <li>Introduction
-                <ul>
-                    <li>Avertissement</li>
-                    <li>Pourquoi Pygame ?</li>
-                    <li>Qu'est-ce qu'un jeu vidéo ?</li>
-                    <li>Prérequis</li>
-                    <li>1... 2... 3... Codez !</li>
-                </ul>
-            </li>
+            <li>Introduction</li>
+            <ul>
+                <li>Avertissement</li>
+                <li>Pourquoi Pygame ?</li>
+                <li>Qu'est-ce qu'un jeu vidéo ?</li>
+                <li>Prérequis</li>
+                <li>1... 2... 3... Codez !</li>
+            </ul>
             <li>Structure et fonctionnement général</li>
         </ol>
         <header class="title">
@@ -92,10 +91,12 @@
             <span style="position: relative; right: 500px; bottom: 190px;">Survoler pour voir la correction</span><span style="position: relative; bottom: 175px; right: 90px;">Résultat attendu</span>
             <div style="position: relative; bottom: 170px;">
                 <h2>Gestion du clavier</h2>
-                <p>Nous avons réussi, mais nous ne sommes pas entièrement satisfaits car le carré change de couleur dès qu'on l'on appuie sur n'importe quelle touche alors qu'il serait évidemment bien mieux d'obtenir le même résultat mais avec une touche exclusive. Par exemple, chaque fois que l'on appuie sur la barre espace. Cela peut être facilement résolu car en plus de posséder un attribut <i>type</i>, certains évènements comme <i>KeyDown</i> ou <i>KeyUp</i> possèdent un attribut <i>key</i> qui fonctionne plus ou moins de la même manière que <i>type</i> notamment au niveau de la syntaxe : <i>if variable_evenement.key == constante_touche</i>. Par exemple, pour la barre espace :</p>
+                <p>Nous avons réussi, mais nous ne sommes pas entièrement satisfaits car le carré change de couleur dès qu'on l'on appuie sur n'importe quelle touche alors qu'il serait évidemment bien mieux d'obtenir le même résultat mais avec une touche exclusive. Par exemple, chaque fois que l'on appuie sur la barre espace. Cela peut être facilement résolu car en plus de posséder un attribut <i>type</i>, certains évènements comme <i>KeyDown</i> ou <i>KeyUp</i> possèdent un attribut <i>key</i> qui fonctionne plus ou moins de la même manière que <i>type</i> notamment au niveau de la syntaxe. En effet,  pour vérifier si la touche pressée est celle attendue par le programme, nous utilisons l'instruction : <i>if variable_evenement.key == constante_touche</i>. Par exemple, pour la barre espace :</p>
                 <img src="Images/tuto25.PNG" alt="tuto" style="margin-left: 350px;">
+                <p>Désormais, le carré changera de couleur uniquement si nous appuyons sur la barre espace. Mais faisons très attention ! Il est nécessaire de veiller à ce qu'une instruction <i>if event.key == pygame.K_constante</i> soit à l'intérieur d'une instruction <i>if event.type == pygame.KEYDOWN</i> (ou <i>KEYUP</i>). Remarquons aussi que les constantes représentant des touches du clavier commencent toujours par un <i>K_</i> (K_SPACE pour la barre espace, K_m pour la touche "m", K_RIGHT pour la flèche directionelle droite, etc...). Enfin, le sous-module pygame.key nous fournit des outils plus avancés comme la fonction <i>get_pressed()</i> que nous étudierons plus bas.</p>
+                <h2>Gestion du temps : créer des timers</h2>
+                <p>Nous avons mentionné l'évènement UserEvent mais à quoi sert-il donc ? Tout d'abord, il est fortement conseiller de stocker la valeur de <i>pygame.USEREVENT</i> dans une variable. Ainsi, nous pourrons le réutiliser avec des timers et dans la boucle évènementielle.</p>
             </div>
-            <p></p>
             <button class="navbuttonleft"><a href="rectangles.html">Précèdent</a></button>
             <img src="Images/pygame_logo.png" alt="logo pygame" class="logo">
             <button class="navbuttonright"><a href="rectangles.html">Suivant</a></button>
